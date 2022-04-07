@@ -20,7 +20,7 @@ const InicioSesion = ({ setIsLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:5000/inicio-sesion", {
+    fetch("http://127.0.0.1:5000/inicio-sesion", {
       method: "POST",
       headers: {
         Accept: "application/json",
