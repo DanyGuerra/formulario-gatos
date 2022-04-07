@@ -21,7 +21,7 @@ const InicioSesion = ({ setIsLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`${host.HOST}/inicio-sesion`, {
+    fetch(`${host.HOST}inicio-sesion`, {
       method: "POST",
       headers: {
         Accept: "application/json",
