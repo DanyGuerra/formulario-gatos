@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import host from "../const";
 
 const InicioSesion = ({ setIsLogin }) => {
   const [correo, setCorreo] = React.useState("");
@@ -20,7 +21,7 @@ const InicioSesion = ({ setIsLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`https://sense-sub.herokuapp.com/inicio-sesion`, {
+    fetch(`${host.HOST}/inicio-sesion`, {
       method: "POST",
       headers: {
         Accept: "application/json",

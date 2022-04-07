@@ -11,7 +11,7 @@ function App() {
         <>
           <ScreenWelcome> </ScreenWelcome>
           <div>
-            <a href="http://localhost:5000/formulario">Formulario</a>
+            <a href="/formulario">Formulario</a>
           </div>
 
           <form method="POST" action="/subir" enctype="multipart/form-data">
