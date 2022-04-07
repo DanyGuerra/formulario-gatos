@@ -7,8 +7,7 @@ const fs = require("fs");
 const multer = require("multer");
 let router = require("express").Router();
 const AWS = require("aws-sdk");
-
-// Raíz del endpoint
+var auth = require("./auth");
 
 const storage = multer.diskStorage({
   destination: "uploads/",
@@ -79,10 +78,6 @@ const deleteFile = (pathFile) => {
   }
 };
 
-router.get("/", (req, res) => {
-  res.render("subir-video");
-});
-
 router.get("/formulario", (req, res) => {
   createExcelFile();
   const file = __dirname + "\\datosformulario.xlsx";
@@ -97,6 +92,10 @@ router.get("/formulario", (req, res) => {
       deleteFile("routes\\datosformulario.xlsx");
     }, 5000);
   }, 2000);
+});
+
+router.post("/inicio-sesion", auth.isAuthorized, (req, res) => {
+  res.sendStatus(200);
 });
 
 router.post("/subir", upload.single("file"), async (req, res) => {
