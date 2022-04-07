@@ -1,4 +1,3 @@
-require("dotenv").config();
 import React, { useEffect } from "react";
 
 const InicioSesion = ({ setIsLogin }) => {
@@ -21,7 +20,7 @@ const InicioSesion = ({ setIsLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`${process.env.HOST}/inicio-sesion`, {
+    fetch(`https://sense-sub.herokuapp.com/inicio-sesion`, {
       method: "POST",
       headers: {
         Accept: "application/json",
