@@ -16,9 +16,12 @@ const SubirVideo = ({ respuestas }) => {
 
     try {
       const response = await fetch(`${host.HOST}subir`, options);
-      response.ok
-        ? console.log(respuestas)
-        : console.log("Error al subir video");
+      const data = await response.json();
+      console.log(data);
+      console.log(respuestas);
+      if (response.ok) {
+      } else {
+      }
     } catch (error) {
       console.log(error);
     }

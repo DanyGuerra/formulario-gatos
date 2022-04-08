@@ -29,6 +29,8 @@ const Encuesta = () => {
   const [opcionSeleccionada, setOpcionSeleccionada] = React.useState("");
   const [respuestas, setRespuestas] = React.useState([]);
   const [end, setEnd] = React.useState(false);
+  const [comment, setComment] = React.useState("");
+
   const [encuestasContestada, setEncuestaContestada] = React.useState("");
 
   useEffect(() => {
@@ -48,7 +50,14 @@ const Encuesta = () => {
 
   const onChangeValue = (event) => {
     setOpcionSeleccionada(event.target.value);
-    console.log(event.target.value);
+  };
+
+  const handleSaveEnd = () => {
+    setRespuestas([...respuestas, comment]);
+  };
+
+  const onChangeComment = (event) => {
+    setComment(event.target.value);
   };
 
   return (
@@ -76,11 +85,10 @@ const Encuesta = () => {
         </>
       ) : (
         <>
-          {end ? (
-            <SubirVideo respuestas={respuestas}> </SubirVideo>
-          ) : (
-            <Comentarios setEnd={setEnd}></Comentarios>
-          )}
+          <h2>¿Tienes algun comentario final?</h2>
+          <textarea onChange={onChangeComment}></textarea>
+          <button onClick={handleSaveEnd}></button>
+          <SubirVideo respuestas={respuestas}> </SubirVideo>
         </>
       )}
     </>

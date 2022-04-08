@@ -39,7 +39,8 @@ const uploadFile = (filePath, fileName) => {
       if (err) {
         reject("bad");
       }
-      resolve("ok");
+      resolve(data);
+      console.log(data);
       console.log(`File uploaded successfully. ${data.Location}`);
     });
   });
@@ -101,9 +102,9 @@ router.post("/inicio-sesion", auth.isAuthorized, (req, res) => {
 router.post("/subir", upload.single("file"), async (req, res) => {
   const file = req.file;
   try {
-    await uploadFile(file.path, file.filename);
+    const dataVideo = await uploadFile(file.path, file.filename);
     deleteFile(file.path);
-    res.sendStatus(200);
+    res.status(200).json(dataVideo);
   } catch (error) {
     res.sendStatus(500);
   }

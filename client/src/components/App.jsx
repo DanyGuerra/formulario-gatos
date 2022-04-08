@@ -16,11 +16,6 @@ function App() {
           ) : (
             <ScreenWelcome setIsStartPoll={setIsStartPoll}> </ScreenWelcome>
           )}
-          {/* <div>
-            <a href="/formulario">Formulario</a>
-          </div>
-
-           */}
         </>
       ) : (
         <InicioSesion setIsLogin={setIsLogin}></InicioSesion>
