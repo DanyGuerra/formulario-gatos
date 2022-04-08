@@ -13,9 +13,6 @@ module.exports.isAuthorized = function (req, res, next) {
   const correo = req.body.user;
   const contra = req.body.password;
 
-  console.log(correo);
-  console.log(contra);
-
   if (!correo || !contra) {
     return res.sendStatus(401);
   }

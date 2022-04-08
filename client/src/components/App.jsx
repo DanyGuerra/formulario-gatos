@@ -1,25 +1,26 @@
 import InicioSesion from "./InicioSesion";
 import React from "react";
 import ScreenWelcome from "./ScreenWelcome";
+import Encuesta from "./Encuesta";
 
 function App() {
   const [isLogin, setIsLogin] = React.useState(false);
+  const [isStartPoll, setIsStartPoll] = React.useState(false);
 
   return (
     <>
       {isLogin ? (
         <>
-          <ScreenWelcome> </ScreenWelcome>
-          <div>
+          {isStartPoll ? (
+            <Encuesta></Encuesta>
+          ) : (
+            <ScreenWelcome setIsStartPoll={setIsStartPoll}> </ScreenWelcome>
+          )}
+          {/* <div>
             <a href="/formulario">Formulario</a>
           </div>
 
-          <form method="POST" action="/subir" enctype="multipart/form-data">
-            <input type="file" name="file" id="input-video" accept="video/*" />
-            <button type="submit" id="btn_subir">
-              Subir
-            </button>
-          </form>
+           */}
         </>
       ) : (
         <InicioSesion setIsLogin={setIsLogin}></InicioSesion>
