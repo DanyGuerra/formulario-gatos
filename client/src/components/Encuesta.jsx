@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import SubirVideo from "./SubirVideo";
+import Comentarios from "./Comentarios";
 
 const encuesta = {
   dia1: [
@@ -27,11 +28,8 @@ const Encuesta = () => {
   const [actualPregunta, setActualPregunta] = React.useState(encuesta.dia1[0]);
   const [opcionSeleccionada, setOpcionSeleccionada] = React.useState("");
   const [respuestas, setRespuestas] = React.useState([]);
+  const [end, setEnd] = React.useState(false);
   const [encuestasContestada, setEncuestaContestada] = React.useState("");
-
-  useEffect(() => {
-    console.log(actualPregunta);
-  }, []);
 
   useEffect(() => {
     setActualPregunta(encuesta.dia1[actualPreguntaN]);
@@ -77,7 +75,13 @@ const Encuesta = () => {
           </div>
         </>
       ) : (
-        <SubirVideo> </SubirVideo>
+        <>
+          {end ? (
+            <SubirVideo respuestas={respuestas}> </SubirVideo>
+          ) : (
+            <Comentarios setEnd={setEnd}></Comentarios>
+          )}
+        </>
       )}
     </>
   );
