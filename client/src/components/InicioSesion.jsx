@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import host from "../const";
+import ScreenWelcome from "./ScreenWelcome";
 
-const InicioSesion = ({ setIsLogin }) => {
+const InicioSesion = ({ setIsLogin, isLogin, setUsuario }) => {
   const [correo, setCorreo] = React.useState("");
   const [contra, setContra] = React.useState("");
   const [failLog, setFailLog] = React.useState(false);
@@ -18,41 +19,45 @@ const InicioSesion = ({ setIsLogin }) => {
     setContra(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    fetch(`${host.HOST}inicio-sesion`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user: correo,
-        password: contra,
-      }),
-    }).then((response) => {
-      if (response.ok) {
-        setFailLog(true);
-        setIsLogin(true);
-      } else {
-      }
-      console.log(response);
-      console.log(response.ok);
-    });
+    try {
+      const response = await fetch(`${host.HOST}inicio-sesion`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: correo,
+          password: contra,
+        }),
+      });
+
+      const jsonResponse = await response.json();
+      setUsuario(jsonResponse.usuario);
+      setIsLogin(true);
+    } catch (error) {
+      setFailLog(true);
+    }
   };
+
+  if (isLogin) {
+    return <ScreenWelcome />;
+  }
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h3>Iniciar Sesion</h3>
-        {failLog ? <h2>Tu correo o contrasena son incorrectos</h2> : <></>}
+        <h1>Iniciar Sesion</h1>
+        {failLog ? <h4>Tu usuario o contrasena son incorrectos</h4> : <></>}
         <div className="form-group">
           <label>Usuario</label>
           <input
             type="text"
             className="form-control"
-            placeholder="Ingresa tu correo"
+            placeholder="Ingresa tu usuario"
             name="user"
             onChange={handleCorreo}
           />

@@ -1,8 +1,10 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import host from "../const";
 
-const SubirVideo = ({ respuestas }) => {
+const SubirVideo = ({ respuestas, usuario, setPollEnded }) => {
   const inputEl = useRef(null);
+  let navigate = useNavigate();
 
   const sendForm = async () => {
     const formData = new FormData();
@@ -17,9 +19,16 @@ const SubirVideo = ({ respuestas }) => {
     try {
       const response = await fetch(`${host.HOST}subir`, options);
       const data = await response.json();
-      console.log(data);
-      console.log(respuestas);
+
+      const dataEncuesta = {
+        usuario: usuario,
+        repuestas: respuestas,
+        videoInfo: data,
+      };
+
       if (response.ok) {
+        console.log(dataEncuesta);
+        navigate("/encuesta/terminada");
       } else {
       }
     } catch (error) {

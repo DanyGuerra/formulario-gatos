@@ -14,7 +14,7 @@ module.exports.isAuthorized = function (req, res, next) {
   const contra = req.body.password;
 
   if (!correo || !contra) {
-    return res.sendStatus(401);
+    return res.status(401);
   }
 
   function search(nameKey, myArray) {

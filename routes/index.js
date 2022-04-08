@@ -40,8 +40,6 @@ const uploadFile = (filePath, fileName) => {
         reject("bad");
       }
       resolve(data);
-      console.log(data);
-      console.log(`File uploaded successfully. ${data.Location}`);
     });
   });
 };
@@ -96,7 +94,7 @@ router.get("/formulario", (req, res) => {
 });
 
 router.post("/inicio-sesion", auth.isAuthorized, (req, res) => {
-  res.sendStatus(200);
+  res.status(200).json({ usuario: req.body.user });
 });
 
 router.post("/subir", upload.single("file"), async (req, res) => {

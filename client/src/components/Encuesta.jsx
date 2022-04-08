@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import SubirVideo from "./SubirVideo";
-import Comentarios from "./Comentarios";
+import { useNavigate } from "react-router-dom";
 
 const encuesta = {
   dia1: [
@@ -23,15 +22,13 @@ const encuesta = {
   ],
 };
 
-const Encuesta = () => {
+const Encuesta = ({ setRespuestas, respuestas }) => {
   const [actualPreguntaN, setActualPreguntaN] = React.useState(0);
   const [actualPregunta, setActualPregunta] = React.useState(encuesta.dia1[0]);
   const [opcionSeleccionada, setOpcionSeleccionada] = React.useState("");
-  const [respuestas, setRespuestas] = React.useState([]);
-  const [end, setEnd] = React.useState(false);
   const [comment, setComment] = React.useState("");
 
-  const [encuestasContestada, setEncuestaContestada] = React.useState("");
+  let navigate = useNavigate();
 
   useEffect(() => {
     setActualPregunta(encuesta.dia1[actualPreguntaN]);
@@ -42,10 +39,8 @@ const Encuesta = () => {
       return;
     }
 
-    setRespuestas([...respuestas, opcionSeleccionada]);
+    setRespuestas((oldArray) => [...oldArray, opcionSeleccionada]);
     setActualPreguntaN((prev) => prev + 1);
-    console.log("siguiente");
-    console.log(respuestas);
   };
 
   const onChangeValue = (event) => {
@@ -53,7 +48,8 @@ const Encuesta = () => {
   };
 
   const handleSaveEnd = () => {
-    setRespuestas([...respuestas, comment]);
+    setRespuestas((oldArray) => [...oldArray, comment]);
+    navigate("/encuesta/video");
   };
 
   const onChangeComment = (event) => {
@@ -87,8 +83,7 @@ const Encuesta = () => {
         <>
           <h2>¿Tienes algun comentario final?</h2>
           <textarea onChange={onChangeComment}></textarea>
-          <button onClick={handleSaveEnd}></button>
-          <SubirVideo respuestas={respuestas}> </SubirVideo>
+          <button onClick={handleSaveEnd}>Guardar</button>
         </>
       )}
     </>
