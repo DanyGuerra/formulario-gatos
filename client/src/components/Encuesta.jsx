@@ -1,5 +1,23 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const EncuestaWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    background: #aa9ceb;
+  }
+`;
 
 const encuesta = {
   dia1: [
@@ -57,15 +75,16 @@ const Encuesta = ({ setRespuestas, day }) => {
   };
 
   return (
-    <>
+    <EncuestaWrapper>
+      <header></header>
       {actualPreguntaN < encuesta.dia1.length ? (
         <>
           <h1>Dia {day}</h1>
           <p>{actualPregunta.pregunta}</p>
 
-          <div>
+          <div className="form">
             {actualPregunta.opciones.map((e, index) => (
-              <>
+              <div className="opcion">
                 <input
                   type="radio"
                   value={e}
@@ -73,7 +92,7 @@ const Encuesta = ({ setRespuestas, day }) => {
                   onChange={onChangeValue}
                 />
                 <span>{e}</span>
-              </>
+              </div>
             ))}
 
             <button onClick={handleSave}> Guardar</button>
@@ -86,7 +105,7 @@ const Encuesta = ({ setRespuestas, day }) => {
           <button onClick={handleSaveEnd}>Guardar</button>
         </>
       )}
-    </>
+    </EncuestaWrapper>
   );
 };
 

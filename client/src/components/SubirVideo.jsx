@@ -1,6 +1,30 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import host from "../const";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    background: #aa9ceb;
+  }
+
+  form {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+  }
+`;
 
 const SubirVideo = ({ respuestas, usuario, day }) => {
   const [sending, setSending] = useState(false);
@@ -55,19 +79,23 @@ const SubirVideo = ({ respuestas, usuario, day }) => {
   };
 
   return (
-    <form enctype="multipart/form-data">
-      <input
-        type="file"
-        name="file"
-        id="input-video"
-        accept="video/*"
-        ref={inputEl}
-        required
-      />
-      <button onClick={handleSendForm} disabled={sending}>
-        Subir
-      </button>
-    </form>
+    <Wrapper>
+      <header></header>
+      <h1>Selecciona el video</h1>
+      <form enctype="multipart/form-data">
+        <input
+          type="file"
+          name="file"
+          id="input-video"
+          accept="video/*"
+          ref={inputEl}
+          required
+        />
+        <button onClick={handleSendForm} disabled={sending}>
+          Subir
+        </button>
+      </form>
+    </Wrapper>
   );
 };
 
