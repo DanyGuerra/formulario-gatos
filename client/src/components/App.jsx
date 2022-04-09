@@ -47,6 +47,7 @@ function App() {
               <SubirVideo
                 respuestas={respuestas}
                 usuario={usuario}
+                day={day}
               ></SubirVideo>
             ) : (
               <></>

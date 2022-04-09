@@ -1,12 +1,21 @@
 const users = [
-  {
-    usuario: "Artemis",
-    contrasena: "Carlos",
-  },
-  {
-    usuario: "Atenea de Belcebú",
-    contrasena: "Luz",
-  },
+  { usuario: "Artemis", contrasena: "Carlos" },
+  { usuario: "Atenea de Belcebú", contrasena: "Luz" },
+  { usuario: "Carlos 3", contrasena: "Felicia" },
+  { usuario: "Carlos 4", contrasena: "Grizabella" },
+  { usuario: "Leticia 5", contrasena: "Günter" },
+  { usuario: "Eva", contrasena: "Lola" },
+  { usuario: "Arturo", contrasena: "Maclovio" },
+  { usuario: "Gabriel", contrasena: "Maria Luisa" },
+  { usuario: "Ninfa", contrasena: "Merlina" },
+  { usuario: "Karina", contrasena: "Micho" },
+  { usuario: "Leticia 11", contrasena: "Moomin" },
+  { usuario: "Alina", contrasena: "Nino" },
+  { usuario: "Cecilia", contrasena: "Olaf" },
+  { usuario: "Ninfa 14", contrasena: "Pericles" },
+  { usuario: "Gabriel 15", contrasena: "Rigoberto" },
+  { usuario: "Luz", contrasena: "Simone de Xibalba" },
+  { usuario: "Alan Sosa", contrasena: "Sol" },
 ];
 
 module.exports.isAuthorized = function (req, res, next) {

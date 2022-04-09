@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import host from "../const";
 
-const SubirVideo = ({ respuestas, usuario, setPollEnded }) => {
+const SubirVideo = ({ respuestas, usuario, day }) => {
+  const [sending, setSending] = useState(false);
   const inputEl = useRef(null);
   let navigate = useNavigate();
 
@@ -24,10 +25,10 @@ const SubirVideo = ({ respuestas, usuario, setPollEnded }) => {
         usuario: usuario,
         respuestas: respuestas,
         videoInfo: data,
+        dia: day,
       };
 
       if (response.ok) {
-        console.log("video enviado");
         const encuesta = await fetch(`${host.HOST}enviar/encuesta`, {
           method: "POST",
           headers: {
@@ -49,8 +50,8 @@ const SubirVideo = ({ respuestas, usuario, setPollEnded }) => {
 
   const handleSendForm = (e) => {
     e.preventDefault();
+    setSending(true);
     sendForm();
-    console.log("Sending Information");
   };
 
   return (
@@ -61,8 +62,11 @@ const SubirVideo = ({ respuestas, usuario, setPollEnded }) => {
         id="input-video"
         accept="video/*"
         ref={inputEl}
+        required
       />
-      <button onClick={handleSendForm}>Subir</button>
+      <button onClick={handleSendForm} disabled={sending}>
+        Subir
+      </button>
     </form>
   );
 };

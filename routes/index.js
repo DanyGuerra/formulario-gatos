@@ -166,11 +166,12 @@ router.post("/enviar/encuesta", async (req, res) => {
   const usuario = req.body.usuario;
   const respuestas = req.body.respuestas;
   const videoInfo = req.body.videoInfo;
+  const dia = req.body.dia;
 
   const encuesta = {
     id: `${usuario}${Date.now()}`,
     user: usuario,
-    day: 1,
+    day: dia,
     repuestas: respuestas,
     videoInfo: videoInfo,
   };
