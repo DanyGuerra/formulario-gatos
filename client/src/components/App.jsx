@@ -9,7 +9,7 @@ function App() {
   const [isLogin, setIsLogin] = React.useState(false);
   const [respuestas, setRespuestas] = React.useState([]);
   const [usuario, setUsuario] = React.useState("");
-  const [pollEnded, setPollEnded] = React.useState(false);
+  const [day, setDay] = React.useState(0);
 
   return (
     <Router>
@@ -21,6 +21,7 @@ function App() {
               setIsLogin={setIsLogin}
               isLogin={isLogin}
               setUsuario={setUsuario}
+              setDay={setDay}
             />
           }
         />
@@ -28,7 +29,11 @@ function App() {
           path="/encuesta"
           element={
             isLogin ? (
-              <Encuesta isLogin={isLogin} setRespuestas={setRespuestas} />
+              <Encuesta
+                isLogin={isLogin}
+                setRespuestas={setRespuestas}
+                day={day}
+              />
             ) : (
               <></>
             )

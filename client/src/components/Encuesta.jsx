@@ -22,7 +22,7 @@ const encuesta = {
   ],
 };
 
-const Encuesta = ({ setRespuestas, respuestas }) => {
+const Encuesta = ({ setRespuestas, day }) => {
   const [actualPreguntaN, setActualPreguntaN] = React.useState(0);
   const [actualPregunta, setActualPregunta] = React.useState(encuesta.dia1[0]);
   const [opcionSeleccionada, setOpcionSeleccionada] = React.useState("");
@@ -60,11 +60,11 @@ const Encuesta = ({ setRespuestas, respuestas }) => {
     <>
       {actualPreguntaN < encuesta.dia1.length ? (
         <>
-          <h1>Dia 1</h1>
+          <h1>Dia {day}</h1>
           <p>{actualPregunta.pregunta}</p>
 
           <div>
-            {actualPregunta.opciones.map((e) => (
+            {actualPregunta.opciones.map((e, index) => (
               <>
                 <input
                   type="radio"

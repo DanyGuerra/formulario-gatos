@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import host from "../const";
 import ScreenWelcome from "./ScreenWelcome";
 
-const InicioSesion = ({ setIsLogin, isLogin, setUsuario }) => {
+const InicioSesion = ({ setIsLogin, isLogin, setUsuario, setDay }) => {
   const [correo, setCorreo] = React.useState("");
   const [contra, setContra] = React.useState("");
   const [failLog, setFailLog] = React.useState(false);
+
+  const [mensajeLogin, setMensajeLogin] = React.useState("");
 
   useEffect(() => {
     setFailLog(false);
@@ -34,10 +36,17 @@ const InicioSesion = ({ setIsLogin, isLogin, setUsuario }) => {
           password: contra,
         }),
       });
+      console.log(response);
 
       const jsonResponse = await response.json();
-      setUsuario(jsonResponse.usuario);
-      setIsLogin(true);
+      if (response.ok) {
+        setUsuario(jsonResponse.usuario);
+        setIsLogin(true);
+        setDay(jsonResponse.dia);
+      } else {
+        setFailLog(true);
+        setMensajeLogin(jsonResponse.mensaje);
+      }
     } catch (error) {
       setFailLog(true);
     }
@@ -51,7 +60,7 @@ const InicioSesion = ({ setIsLogin, isLogin, setUsuario }) => {
     <>
       <form onSubmit={handleSubmit}>
         <h1>Iniciar Sesion</h1>
-        {failLog ? <h4>Tu usuario o contrasena son incorrectos</h4> : <></>}
+        {failLog ? <h4>{mensajeLogin}</h4> : <></>}
         <div className="form-group">
           <label>Usuario</label>
           <input

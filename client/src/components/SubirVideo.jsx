@@ -22,13 +22,24 @@ const SubirVideo = ({ respuestas, usuario, setPollEnded }) => {
 
       const dataEncuesta = {
         usuario: usuario,
-        repuestas: respuestas,
+        respuestas: respuestas,
         videoInfo: data,
       };
 
       if (response.ok) {
-        console.log(dataEncuesta);
-        navigate("/encuesta/terminada");
+        console.log("video enviado");
+        const encuesta = await fetch(`${host.HOST}enviar/encuesta`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataEncuesta),
+        });
+
+        if (encuesta.ok) {
+          navigate("/encuesta/terminada");
+        }
       } else {
       }
     } catch (error) {

@@ -14,7 +14,7 @@ module.exports.isAuthorized = function (req, res, next) {
   const contra = req.body.password;
 
   if (!correo || !contra) {
-    return res.status(401);
+    res.status(401).json({ mensaje: "Usuario a contrasena incorrecta" });
   }
 
   function search(nameKey, myArray) {
@@ -27,23 +27,13 @@ module.exports.isAuthorized = function (req, res, next) {
 
   let user = search(correo, users);
 
+  if (!user) {
+    res.status(401).json({ mensaje: "Usuario a contrasena incorrecta" });
+  }
+
   if (user.contrasena === contra) {
     return next();
   } else {
-    res.sendStatus(401);
+    res.status(401).json({ mensaje: "Usuario a contrasena incorrecta" });
   }
-
-  // User.findById(req.session.userId).exec(function (error, user) {
-  //   if (error) {
-  //     return next(error);
-  //   } else {
-  //     if (user === null) {
-  //       var err = new Error("Not authorized! Go back!");
-  //       err.status = 401;
-  //       return next(err);
-  //     } else {
-  //       return next();
-  //     }
-  //   }
-  // });
 };
