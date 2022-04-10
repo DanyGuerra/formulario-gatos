@@ -90,7 +90,6 @@ const InicioSesion = ({ setIsLogin, isLogin, setUsuario, setDay }) => {
           password: contra,
         }),
       });
-      console.log(response);
 
       const jsonResponse = await response.json();
       if (response.ok) {
@@ -101,6 +100,9 @@ const InicioSesion = ({ setIsLogin, isLogin, setUsuario, setDay }) => {
         setFailLog(true);
         setMensajeLogin(jsonResponse.mensaje);
       }
+      setTimeout(() => {
+        setFailLog(false);
+      }, [3000]);
     } catch (error) {
       setFailLog(true);
     }

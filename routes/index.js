@@ -8,21 +8,37 @@ const multer = require("multer");
 let router = require("express").Router();
 const AWS = require("aws-sdk");
 var auth = require("./auth");
+const TABLE_NAME = "sense-encuestas";
 
-const storage = multer.diskStorage({
-  destination: "uploads/",
-  filename: function (req, file, cb) {
-    cb("", Date.now() + "." + mimeTypes.extension(file.mimetype));
-  },
-});
-
-const upload = multer({
-  storage: storage,
+AWS.config.update({
+  accessKeyId: process.env.ID,
+  secretAccessKey: process.env.SECRET,
+  region: "us-east-1",
 });
 
 const s3 = new AWS.S3({
   accessKeyId: process.env.ID,
   secretAccessKey: process.env.SECRET,
+});
+
+const dynamoClient = new AWS.DynamoDB.DocumentClient();
+
+const storage = multer.diskStorage({
+  destination: "uploads/",
+  filename: function (req, file, cb) {
+    cb(
+      "",
+      file.fieldname +
+        "-" +
+        Date.now() +
+        "." +
+        mimeTypes.extension(file.mimetype)
+    );
+  },
+});
+
+const upload = multer({
+  storage: storage,
 });
 
 const uploadFile = (filePath, fileName) => {
@@ -44,16 +60,6 @@ const uploadFile = (filePath, fileName) => {
   });
 };
 
-AWS.config.update({
-  accessKeyId: process.env.ID,
-  secretAccessKey: process.env.SECRET,
-  region: "us-east-1",
-});
-
-const dynamoClient = new AWS.DynamoDB.DocumentClient();
-
-const TABLE_NAME = "sense-encuestas";
-
 //Ecuestas en Dynamo
 const getEncuestas = async () => {
   const params = {
@@ -62,7 +68,6 @@ const getEncuestas = async () => {
 
   const encuestas = await dynamoClient.scan(params).promise();
 
-  console.log(encuestas);
   return encuestas;
 };
 
@@ -142,8 +147,6 @@ router.get("/formulario", (req, res) => {
 router.post("/inicio-sesion", auth.isAuthorized, async (req, res) => {
   const encuestas = await getEncuestaByUser(req.body.user);
 
-  console.log(encuestas);
-
   if (encuestas.Count == 2) {
     res.status(401).json({ mensaje: "El usuario ya contesto las encuestas" });
   } else {
@@ -178,6 +181,23 @@ router.post("/enviar/encuesta", async (req, res) => {
 
   addOrUpdateEncuesta(encuesta);
   res.sendStatus(200);
+});
+
+router.get("/download/:filename", async (req, res) => {
+  const filename = req.params.filename;
+  let video = await s3
+    .getObject({
+      Bucket: process.env.BUCKET_NAME,
+      Key: filename,
+    })
+    .promise();
+
+  res.status(200).send(video.Body);
+});
+
+router.get("/admin/encuestas", async (req, res) => {
+  const encuestas = await getEncuestas();
+  res.status(200).json(encuestas);
 });
 
 module.exports = router;

@@ -4,6 +4,7 @@ import SubirVideo from "./SubirVideo";
 import Encuesta from "./Encuesta";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EncuestaTerminada from "./EncuestaTerminada";
+import Administrador from "./Administrador";
 
 function App() {
   const [isLogin, setIsLogin] = React.useState(false);
@@ -56,6 +57,7 @@ function App() {
         />
 
         <Route path="/encuesta/terminada" element={<EncuestaTerminada />} />
+        <Route path="/administrador" element={<Administrador />} />
       </Routes>
     </Router>
   );

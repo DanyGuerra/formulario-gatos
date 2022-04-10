@@ -18,7 +18,10 @@ const users = [
   { usuario: "Alan Sosa", contrasena: "Sol" },
 ];
 
-module.exports.isAuthorized = function (req, res, next) {
+
+
+
+const isAuthorized = function (req, res, next) {
   const correo = req.body.user;
   const contra = req.body.password;
 
@@ -46,3 +49,9 @@ module.exports.isAuthorized = function (req, res, next) {
     res.status(401).json({ mensaje: "Usuario a contrasena incorrecta" });
   }
 };
+
+
+
+module.exports={
+  isAuthorized
+}
