@@ -109,7 +109,7 @@ const getEncuestasByDay = async (day) => {
 
 // getEncuestas();
 
-const createExcelFile = (headerColumns, data) => {
+const createExcelFile = (headerColumns, data, filename) => {
   const wb = new xl.Workbook();
   const ws = wb.addWorksheet("Sheet1");
   let colIndex = 1;
@@ -124,7 +124,7 @@ const createExcelFile = (headerColumns, data) => {
     });
     rowIndex++;
   });
-  wb.write("routes\\datosformulario.xlsx");
+  wb.write(`routes\\encuestas-dia${filename}.xlsx`);
 };
 
 const deleteFile = (pathFile) => {
@@ -134,27 +134,6 @@ const deleteFile = (pathFile) => {
     console.error(err);
   }
 };
-
-router.get("/formulario", (req, res) => {
-  const headerColumns = ["Nombre", "Correo", "Telefono"];
-  const data = [
-    { name: "luis", email: "luis@example.com", phone: "4644634234" },
-    { name: "Roberto", email: "roberto@example.com", phone: "234523452345" },
-  ];
-  createExcelFile(headerColumns, data);
-  const file = __dirname + "\\datosformulario.xlsx";
-
-  const fileName = path.basename(file);
-  const mimeType = mime.getType(file);
-  res.setHeader("Content-Disposition", "attachment;filename=" + fileName);
-  res.setHeader("Content-Type", mimeType);
-  setTimeout(() => {
-    res.download(file);
-    setTimeout(() => {
-      deleteFile("routes\\datosformulario.xlsx");
-    }, 5000);
-  }, 2000);
-});
 
 router.post("/inicio-sesion", auth.isAuthorized, async (req, res) => {
   const encuestas = await getEncuestaByUser(req.body.user);
@@ -219,24 +198,38 @@ router.get("/admin/encuestas/:dia", async (req, res) => {
   res.status(200).json(encuestasDia);
 });
 
-router.get("/admin/descargar-excel", async (req, res) => {
-  console.log(req.body);
+router.get("/admin/descargar-excel/:dia", async (req, res) => {
+  const dia = req.params.dia;
+  const encuestasDia = await getEncuestasByDay(parseInt(dia));
+  const encuestas = encuestasDia.Items;
+
   const headerColumns = [
     "Usuario",
-    "Pregunta 1",
-    "Pregunta 2",
-    "Pregunta 3",
-    "Pregunta 4",
+    "1. ¿Cuál olio primero?",
+    "2. ¿Cuál comió primero?",
+    "3. ¿De cuál código comió mas?",
+    "4. ¿Cuanto comió?",
     "Comentarios",
     "Nombre del video",
   ];
 
-  const data = [
-    { usuario: "luis", email: "luis@example.com", phone: "4644634234" },
-    { usuario: "Roberto", email: "roberto@example.com", phone: "234523452345" },
-  ];
-  const fileCreate = await createExcelFile(headerColumns, data);
-  const file = __dirname + "\\datosformulario.xlsx";
+  const data = [];
+
+  encuestas.map((item) => {
+    const encuesta = {
+      usuario: item.user,
+      pregunta1: item.repuestas[0],
+      pregunta2: item.repuestas[1],
+      pregunta3: item.repuestas[2],
+      pregunta4: item.repuestas[3],
+      comentarios: item.repuestas[4],
+      nombre_video: item.videoInfo.Key,
+    };
+    data.push(encuesta);
+  });
+
+  const fileCreate = await createExcelFile(headerColumns, data, dia);
+  const file = __dirname + `\\encuestas-dia${dia}.xlsx`;
 
   const fileName = path.basename(file);
   const mimeType = mime.getType(file);
@@ -245,7 +238,7 @@ router.get("/admin/descargar-excel", async (req, res) => {
   setTimeout(() => {
     res.download(file);
     setTimeout(() => {
-      deleteFile("routes\\datosformulario.xlsx");
+      deleteFile(`routes\\encuestas-dia${dia}.xlsx`);
     }, 5000);
   }, 2000);
 });

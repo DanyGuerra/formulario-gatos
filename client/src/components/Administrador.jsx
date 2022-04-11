@@ -67,6 +67,7 @@ const Encuestas = styled.div`
 
 const Administrador = () => {
   const [encuestas, setEncuestas] = useState([]);
+  const [day, setDay] = useState(1);
 
   useEffect(() => {
     getAllEncuestas();
@@ -82,43 +83,25 @@ const Administrador = () => {
     } catch (error) {}
   };
 
-  const handleClick = async (e) => {
+  const handleDayClick = async (e) => {
+    const dia = e.target.value;
+    setDay(dia);
     try {
-      const response = await fetch(
-        `${host.HOST}admin/encuestas/${e.target.value}`,
-        {
-          method: "GET",
-        }
-      );
+      const response = await fetch(`${host.HOST}admin/encuestas/${dia}`, {
+        method: "GET",
+      });
       const encuestasDia = await response.json();
       setEncuestas(encuestasDia.Items);
     } catch (error) {}
   };
 
-  const handleExcel = async () => {
-    console.log("Descargar excel por aqui");
-    try {
-      const response = await fetch(`${host.HOST}admin/descargar-excel`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(encuestas),
-      });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <Template>
       <header></header>
-      <button value={1} onClick={handleClick}>
+      <button value={1} onClick={handleDayClick}>
         Dia 1
       </button>
-      <button value={2} onClick={handleClick}>
+      <button value={2} onClick={handleDayClick}>
         Dia 2
       </button>
 
@@ -148,7 +131,7 @@ const Administrador = () => {
           );
         })}
       </Encuestas>
-      <button onClick={handleExcel}>Descargar excel</button>
+      <a href={`${host.HOST}admin/descargar-excel/${day}`}>Descargar excel</a>
     </Template>
   );
 };
