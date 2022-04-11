@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import host from "../const";
 import styled from "styled-components";
+import IconoVideo from "./IconoVideo";
 
 const Template = styled.div`
   display: flex;
@@ -37,9 +38,21 @@ const Encuestas = styled.div`
     height: 60px;
     border-bottom: solid black 1px;
     display: grid;
-    grid-template-columns: 33% 33% 33%;
+    grid-template-columns: 20% 20% 60%;
 
     .item {
+      .icon {
+        display: inline;
+        margin-bottom: 10px;
+
+        :hover {
+          cursor: pointer;
+        }
+      }
+      span {
+        margin-left: 10px;
+        padding-top: 10px;
+      }
     }
   }
 `;
@@ -77,7 +90,14 @@ const Administrador = () => {
               <div key={item.user} className="row">
                 <div className="item">{item.user}</div>
                 <div className="item">{item.day}</div>
-                <div className="item">{item.videoInfo.Key}</div>
+                <div className="item">
+                  <div className="icon">
+                    <a href={`${host.HOST}download/${item.videoInfo.Key}`}>
+                      <IconoVideo></IconoVideo>
+                    </a>
+                  </div>
+                  <span>{item.videoInfo.Key}</span>
+                </div>
               </div>
             </>
           );
