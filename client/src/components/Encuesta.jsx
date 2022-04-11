@@ -59,6 +59,7 @@ const Encuesta = ({ setRespuestas, day }) => {
 
     setRespuestas((oldArray) => [...oldArray, opcionSeleccionada]);
     setActualPreguntaN((prev) => prev + 1);
+    setOpcionSeleccionada("");
   };
 
   const onChangeValue = (event) => {
@@ -88,7 +89,8 @@ const Encuesta = ({ setRespuestas, day }) => {
                 <input
                   type="radio"
                   value={e}
-                  name="p1"
+                  name={e}
+                  checked={e === opcionSeleccionada}
                   onChange={onChangeValue}
                 />
                 <span>{e}</span>

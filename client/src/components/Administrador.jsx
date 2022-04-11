@@ -26,6 +26,14 @@ const Encuestas = styled.div`
   height: 400px;
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  .header {
+    background-color: #ffffff;
+    position: sticky;
+    top: 0;
+  }
 
   .row:last-child {
     border-bottom: none;
@@ -66,7 +74,7 @@ const Administrador = () => {
 
   const getAllEncuestas = async () => {
     try {
-      const response = await fetch(`${host.HOST}admin/encuestas`, {
+      const response = await fetch(`${host.HOST}admin/encuestas/1`, {
         method: "GET",
       });
       const encuestas = await response.json();
@@ -74,11 +82,48 @@ const Administrador = () => {
     } catch (error) {}
   };
 
+  const handleClick = async (e) => {
+    try {
+      const response = await fetch(
+        `${host.HOST}admin/encuestas/${e.target.value}`,
+        {
+          method: "GET",
+        }
+      );
+      const encuestasDia = await response.json();
+      setEncuestas(encuestasDia.Items);
+    } catch (error) {}
+  };
+
+  const handleExcel = async () => {
+    console.log("Descargar excel por aqui");
+    try {
+      const response = await fetch(`${host.HOST}admin/descargar-excel`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(encuestas),
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Template>
       <header></header>
+      <button value={1} onClick={handleClick}>
+        Dia 1
+      </button>
+      <button value={2} onClick={handleClick}>
+        Dia 2
+      </button>
+
       <Encuestas>
-        <div className="row">
+        <div className="row header">
           <div className="item">Usuario</div>
           <div className="item">Encuesta</div>
           <div className="item">Video</div>
@@ -103,6 +148,7 @@ const Administrador = () => {
           );
         })}
       </Encuestas>
+      <button onClick={handleExcel}>Descargar excel</button>
     </Template>
   );
 };

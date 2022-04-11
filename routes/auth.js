@@ -1,25 +1,22 @@
 const users = [
-  { usuario: "Artemis", contrasena: "Carlos" },
-  { usuario: "Atenea de Belcebú", contrasena: "Luz" },
-  { usuario: "Carlos 3", contrasena: "Felicia" },
-  { usuario: "Carlos 4", contrasena: "Grizabella" },
-  { usuario: "Leticia 5", contrasena: "Günter" },
-  { usuario: "Eva", contrasena: "Lola" },
-  { usuario: "Arturo", contrasena: "Maclovio" },
-  { usuario: "Gabriel", contrasena: "Maria Luisa" },
-  { usuario: "Ninfa", contrasena: "Merlina" },
-  { usuario: "Karina", contrasena: "Micho" },
-  { usuario: "Leticia 11", contrasena: "Moomin" },
-  { usuario: "Alina", contrasena: "Nino" },
-  { usuario: "Cecilia", contrasena: "Olaf" },
-  { usuario: "Ninfa 14", contrasena: "Pericles" },
-  { usuario: "Gabriel 15", contrasena: "Rigoberto" },
-  { usuario: "Luz", contrasena: "Simone de Xibalba" },
-  { usuario: "Alan Sosa", contrasena: "Sol" },
+  { contrasena: "Carlos", usuario: "Artemis" },
+  { contrasena: "Atenea de Belcebú", usuario: "Luz" },
+  { contrasena: "Carlos 3", usuario: "Felicia" },
+  { contrasena: "Carlos 4", usuario: "Grizabella" },
+  { contrasena: "Leticia 5", usuario: "Günter" },
+  { contrasena: "Eva", usuario: "Lola" },
+  { contrasena: "Arturo", usuario: "Maclovio" },
+  { contrasena: "Gabriel", usuario: "Maria Luisa" },
+  { contrasena: "Ninfa", usuario: "Merlina" },
+  { contrasena: "Karina", usuario: "Micho" },
+  { contrasena: "Leticia 11", usuario: "Moomin" },
+  { contrasena: "Alina", usuario: "Nino" },
+  { contrasena: "Cecilia", usuario: "Olaf" },
+  { contrasena: "Ninfa 14", usuario: "Pericles" },
+  { contrasena: "Gabriel 15", usuario: "Rigoberto" },
+  { contrasena: "Luz", usuario: "Simone de Xibalba" },
+  { contrasena: "Alan Sosa", usuario: "Sol" },
 ];
-
-
-
 
 const isAuthorized = function (req, res, next) {
   const correo = req.body.user;
@@ -50,8 +47,6 @@ const isAuthorized = function (req, res, next) {
   }
 };
 
-
-
-module.exports={
-  isAuthorized
-}
+module.exports = {
+  isAuthorized,
+};

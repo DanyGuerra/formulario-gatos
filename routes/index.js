@@ -93,16 +93,23 @@ const getEncuestaByUser = async (user) => {
   return await dynamoClient.scan(params).promise();
 };
 
+const getEncuestasByDay = async (day) => {
+  const params = {
+    TableName: TABLE_NAME,
+    FilterExpression: "#day = :day",
+    ExpressionAttributeNames: {
+      "#day": "day",
+    },
+    ExpressionAttributeValues: {
+      ":day": day,
+    },
+  };
+  return await dynamoClient.scan(params).promise();
+};
+
 // getEncuestas();
 
-const headerColumns = ["Nombre", "Correo", "Telefono"];
-
-const data = [
-  { name: "luis", email: "luis@example.com", phone: "4644634234" },
-  { name: "Roberto", email: "roberto@example.com", phone: "234523452345" },
-];
-
-const createExcelFile = () => {
+const createExcelFile = (headerColumns, data) => {
   const wb = new xl.Workbook();
   const ws = wb.addWorksheet("Sheet1");
   let colIndex = 1;
@@ -129,7 +136,12 @@ const deleteFile = (pathFile) => {
 };
 
 router.get("/formulario", (req, res) => {
-  createExcelFile();
+  const headerColumns = ["Nombre", "Correo", "Telefono"];
+  const data = [
+    { name: "luis", email: "luis@example.com", phone: "4644634234" },
+    { name: "Roberto", email: "roberto@example.com", phone: "234523452345" },
+  ];
+  createExcelFile(headerColumns, data);
   const file = __dirname + "\\datosformulario.xlsx";
 
   const fileName = path.basename(file);
@@ -198,6 +210,44 @@ router.get("/download/:filename", async (req, res) => {
 router.get("/admin/encuestas", async (req, res) => {
   const encuestas = await getEncuestas();
   res.status(200).json(encuestas);
+});
+
+router.get("/admin/encuestas/:dia", async (req, res) => {
+  //http://localhost:5000/admin/encuestas/2
+  const dia = req.params.dia;
+  const encuestasDia = await getEncuestasByDay(parseInt(dia));
+  res.status(200).json(encuestasDia);
+});
+
+router.get("/admin/descargar-excel", async (req, res) => {
+  console.log(req.body);
+  const headerColumns = [
+    "Usuario",
+    "Pregunta 1",
+    "Pregunta 2",
+    "Pregunta 3",
+    "Pregunta 4",
+    "Comentarios",
+    "Nombre del video",
+  ];
+
+  const data = [
+    { usuario: "luis", email: "luis@example.com", phone: "4644634234" },
+    { usuario: "Roberto", email: "roberto@example.com", phone: "234523452345" },
+  ];
+  const fileCreate = await createExcelFile(headerColumns, data);
+  const file = __dirname + "\\datosformulario.xlsx";
+
+  const fileName = path.basename(file);
+  const mimeType = mime.getType(file);
+  res.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+  res.setHeader("Content-Type", mimeType);
+  setTimeout(() => {
+    res.download(file);
+    setTimeout(() => {
+      deleteFile("routes\\datosformulario.xlsx");
+    }, 5000);
+  }, 2000);
 });
 
 module.exports = router;

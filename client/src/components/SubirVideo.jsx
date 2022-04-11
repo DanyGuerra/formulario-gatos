@@ -28,6 +28,8 @@ const Wrapper = styled.div`
 
 const SubirVideo = ({ respuestas, usuario, day }) => {
   const [sending, setSending] = useState(false);
+  const [isVideo, setIsVideo] = useState(false);
+
   const inputEl = useRef(null);
   let navigate = useNavigate();
 
@@ -78,6 +80,15 @@ const SubirVideo = ({ respuestas, usuario, day }) => {
     sendForm();
   };
 
+  const handleVideo = (e) => {
+    let file = e.target.files[0];
+    if (file) {
+      setIsVideo(true);
+    } else {
+      setIsVideo(false);
+    }
+  };
+
   return (
     <Wrapper>
       <header></header>
@@ -90,8 +101,9 @@ const SubirVideo = ({ respuestas, usuario, day }) => {
           accept="video/*"
           ref={inputEl}
           required
+          onChange={handleVideo}
         />
-        <button onClick={handleSendForm} disabled={sending}>
+        <button onClick={handleSendForm} disabled={!isVideo}>
           Subir
         </button>
       </form>
