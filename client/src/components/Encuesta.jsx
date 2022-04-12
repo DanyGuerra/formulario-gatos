@@ -85,7 +85,7 @@ const Encuesta = ({ setRespuestas, day }) => {
 
           <div className="form">
             {actualPregunta.opciones.map((e, index) => (
-              <div className="opcion">
+              <div key={e} className="opcion">
                 <input
                   type="radio"
                   value={e}

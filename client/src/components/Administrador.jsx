@@ -4,18 +4,102 @@ import styled from "styled-components";
 import IconoVideo from "./IconoVideo";
 
 const Template = styled.div`
-  display: flex;
+  display: grid;
   width: 100%;
   height: 100vh;
-  align-items: center;
-  justify-content: center;
+  row-gap: 10px;
+  column-gap: 40px;
+
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(7, 1fr);
 
   header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 80px;
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 2;
     background: #aa9ceb;
+  }
+  .l-side {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 6;
+  }
+  .r-side {
+    grid-column-start: 5;
+    grid-column-end: 6;
+    grid-row-start: 2;
+    grid-row-end: 6;
+  }
+  .title-1 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  .title-2 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    /* background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+  }
+  .download-excel {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 5;
+    grid-row-end: 6;
+    display: flex;
+    flex-direction: column-reverse;
+
+    .btn-excel {
+      height: 66px;
+      border: 1px solid #000000;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      #link-excel {
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
+  .filters {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    button {
+      margin-right: 20px;
+      background-color: white;
+      border: 1px solid #000000;
+      box-sizing: border-box;
+      border-radius: 10px;
+    }
+  }
+  .encuestas {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 6;
+  }
+  .pagination {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 6;
+    grid-row-end: 7;
+  }
+  footer {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 7;
+    grid-row-end: 8;
   }
 `;
 
@@ -98,14 +182,18 @@ const Administrador = () => {
   return (
     <Template>
       <header></header>
-      <button value={1} onClick={handleDayClick}>
-        Dia 1
-      </button>
-      <button value={2} onClick={handleDayClick}>
-        Dia 2
-      </button>
-
-      <Encuestas>
+      <div className="filters">
+        <button value={1} onClick={handleDayClick}>
+          Dia 1
+        </button>
+        <button value={2} onClick={handleDayClick}>
+          Dia 2
+        </button>
+      </div>
+      <div className="l-side"></div>
+      <div className="title-1">Numero total de encuestas</div>
+      <div className="title-2"></div>
+      <Encuestas className="encuestas">
         <div className="row header">
           <div className="item">Usuario</div>
           <div className="item">Encuesta</div>
@@ -131,7 +219,17 @@ const Administrador = () => {
           );
         })}
       </Encuestas>
-      <a href={`${host.HOST}admin/descargar-excel/${day}`}>Descargar excel</a>
+
+      <div className="r-side"></div>
+      <div className="pagination"></div>
+      <div className="download-excel">
+        <div className="btn-excel">
+          <a id="link-excel" href={`${host.HOST}admin/descargar-excel/${day}`}>
+            Descargar excel
+          </a>
+        </div>
+      </div>
+      <footer></footer>
     </Template>
   );
 };

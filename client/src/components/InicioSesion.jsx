@@ -104,6 +104,7 @@ const InicioSesion = ({ setIsLogin, isLogin, setUsuario, setDay }) => {
         setFailLog(false);
       }, [3000]);
     } catch (error) {
+      console.log(error);
       setFailLog(true);
     }
   };
@@ -123,7 +124,7 @@ const InicioSesion = ({ setIsLogin, isLogin, setUsuario, setDay }) => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g clip-path="url(#clip0_308_198)">
+          <g clipPath="url(#clip0_308_198)">
             <path
               d="M86.38 40.5899V86.8199H11.48V12.0599L44.92 37.0599L68 0.579941H54.73L41.9 20.4699L15.11 0.439941H0V98.2999H97.86V21.9999L86.38 40.5899Z"
               fill="#260F5D"
