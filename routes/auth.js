@@ -1,4 +1,5 @@
 const users = [
+  { contrasena: "admin", usuario: "administradorSUB", tipo: "admin" },
   { contrasena: "Carlos", usuario: "Artemis" },
   { contrasena: "Atenea de Belcebú", usuario: "Luz" },
   { contrasena: "Carlos 3", usuario: "Felicia" },
@@ -47,6 +48,36 @@ const isAuthorized = function (req, res, next) {
   }
 };
 
+const isAdmin = function (req, res, next) {
+  const correo = req.body.user;
+  const contra = req.body.password;
+
+  if (!correo || !contra) {
+    res.status(401).json({ mensaje: "Usuario o contraseña incorrecta" });
+  }
+
+  function search(nameKey, myArray) {
+    for (var i = 0; i < myArray.length; i++) {
+      if (myArray[i].usuario === nameKey) {
+        return myArray[i];
+      }
+    }
+  }
+
+  let user = search(correo, users);
+
+  if (!user) {
+    res.status(401).json({ mensaje: "Usuario o contraseña incorrectos" });
+  }
+
+  if (user.contrasena === contra && user.tipo === "admin") {
+    return next();
+  } else {
+    res.status(401).json({ mensaje: "No tienes acceso" });
+  }
+};
+
 module.exports = {
   isAuthorized,
+  isAdmin,
 };

@@ -145,6 +145,11 @@ router.post("/inicio-sesion", auth.isAuthorized, async (req, res) => {
   }
 });
 
+router.post("/admin", auth.isAdmin, async (req, res) => {
+  console.log("todo bien");
+  res.status(200).json({ mensaje: "Usuario autorizado" });
+});
+
 router.post("/subir", upload.single("file"), async (req, res) => {
   const file = req.file;
   try {
