@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Header from "./Header";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -7,22 +8,26 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100px;
-    background: #aa9ceb;
+  background: #aa9ceb;
+  .mensaje {
+    text-align: center;
+    font-family: "Sen";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 60px;
+    width: 40%;
   }
 `;
 
 const EncuestaTerminada = () => {
   return (
-    <Wrapper>
-      <header></header>
-      <div>Gracias por tu respuesta</div>
-    </Wrapper>
+    <>
+      <Header></Header>
+      <Wrapper>
+        <div className="mensaje">¡GRACIAS POR TUS RESPUESTAS!</div>
+      </Wrapper>
+    </>
   );
 };
 

@@ -5,13 +5,14 @@ import Header from "./Header";
 
 const EncuestaWrapper = styled.div`
   width: 100%;
-  margin-top: 60px;
+  margin-top: 40px;
 
   .form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     font-family: "Sen";
 
     h1 {
@@ -33,10 +34,14 @@ const EncuestaWrapper = styled.div`
       align-items: center;
       justify-content: center;
       width: 50%;
-      height: 40vh;
+      height: 50vh;
       background: #ffffff;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       font-weight: 400;
+
+      p {
+        margin-bottom: 40px;
+      }
 
       textarea {
         background: #ffffff;
@@ -46,6 +51,7 @@ const EncuestaWrapper = styled.div`
         resize: none;
         width: 80%;
         height: 120px;
+        margin-bottom: 36px;
 
         :hover {
           border: 1px solid #aa9ceb;
@@ -203,7 +209,10 @@ const Encuesta = ({ setRespuestas, day }) => {
                   <h1>DÍA {day}</h1>
                   <div className="formulario-comment">
                     <p>5. ¿Comentarios?</p>
-                    <textarea onChange={onChangeComment}></textarea>
+                    <textarea
+                      onChange={onChangeComment}
+                      placeholder="Deja tu comentario (opcional)"
+                    ></textarea>
                     <button onClick={handleSaveEnd}>GUARDAR</button>
                   </div>
                 </div>

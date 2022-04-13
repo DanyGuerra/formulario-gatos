@@ -2,27 +2,72 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import host from "../const";
 import styled from "styled-components";
+import Header from "./Header";
 
-const Wrapper = styled.div`
+const EncuestaWrapper = styled.div`
   width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  margin-top: 40px;
 
-  header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100px;
-    background: #aa9ceb;
-  }
-
-  form {
+  .form {
     display: flex;
-    gap: 30px;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Sen";
+
+    h1 {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 40px;
+      line-height: 48px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #000000;
+      margin-top: 60px;
+      margin-bottom: 60px;
+    }
+
+    .formulario {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 50%;
+      height: 40vh;
+      background: #ffffff;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      font-weight: 400;
+
+      .form {
+        width: 80%;
+
+        .file-input {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          input {
+          }
+          label {
+          }
+        }
+      }
+    }
+    button {
+      width: 250.48px;
+      height: 60px;
+      background: #260f5d;
+      border-radius: 4px;
+      color: white;
+      :disabled {
+        opacity: 0.4;
+        cursor: not-allowed !important;
+      }
+      :hover {
+        cursor: pointer;
+      }
+    }
   }
 `;
 
@@ -90,24 +135,33 @@ const SubirVideo = ({ respuestas, usuario, day }) => {
   };
 
   return (
-    <Wrapper>
-      <header></header>
-      <h1>Selecciona el video</h1>
-      <form enctype="multipart/form-data">
-        <input
-          type="file"
-          name="file"
-          id="input-video"
-          accept="video/*"
-          ref={inputEl}
-          required
-          onChange={handleVideo}
-        />
-        <button onClick={handleSendForm} disabled={!isVideo}>
-          Subir
-        </button>
-      </form>
-    </Wrapper>
+    <>
+      <Header></Header>
+      <EncuestaWrapper>
+        <div className="form">
+          <h1>DÍA 1</h1>
+          <form enctype="multipart/form-data" className="formulario">
+            <p>6. Subir video</p>
+            <div className="form">
+              <div className="opcion file-input">
+                <input
+                  type="file"
+                  name="file"
+                  id="file"
+                  className="file"
+                  accept="video/*"
+                  ref={inputEl}
+                  onChange={handleVideo}
+                />
+              </div>
+            </div>
+            <button onClick={handleSendForm} disabled={!isVideo}>
+              FINALIZAR
+            </button>
+          </form>
+        </div>
+      </EncuestaWrapper>
+    </>
   );
 };
 

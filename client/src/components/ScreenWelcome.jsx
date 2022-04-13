@@ -4,6 +4,8 @@ import styled from "styled-components";
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import Header from "./Header";
+import { AiOutlineClose } from "react-icons/ai";
+import image from "../assets/infomodal.png";
 
 const WelcomeWrapper = styled.div`
   width: 100%;
@@ -12,6 +14,21 @@ const WelcomeWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  #header-title {
+    font-family: "Sen";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #260f5d;
+  }
+
+  svg {
+    :hover {
+      cursor: pointer;
+    }
+  }
 
   header {
     position: fixed;
@@ -88,12 +105,13 @@ function ScreenWelcome() {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
+        <Modal.Header className="modal-header">
+          <h1 id="header-title">Dudas</h1>
+          <AiOutlineClose onClick={() => setShow(false)}></AiOutlineClose>
+        </Modal.Header>
         <Modal.Body>
-          <p>Aqui va la informacion</p>
+          <img src={image} alt="Dudas" className="img-fluid" />
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setShow(false)}>Close</Button>
-        </Modal.Footer>
       </Modal>
 
       <WelcomeWrapper>
