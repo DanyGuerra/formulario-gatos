@@ -5,7 +5,7 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import Header from "./Header";
 import { AiOutlineClose } from "react-icons/ai";
-import image from "../assets/infomodal.png";
+import image from "../assets/instrucciones-panelfelino-1.png";
 
 const WelcomeWrapper = styled.div`
   width: 100%;
@@ -106,7 +106,17 @@ function ScreenWelcome() {
         centered
       >
         <Modal.Header className="modal-header">
-          <h1 id="header-title">Dudas</h1>
+          <h1
+            id="header-title"
+            style={{
+              fontFamily: "Sen",
+              fontStyle: "normal",
+              fontWeight: "700",
+              fontSize: "24px",
+            }}
+          >
+            Dudas
+          </h1>
           <AiOutlineClose onClick={() => setShow(false)}></AiOutlineClose>
         </Modal.Header>
         <Modal.Body>
