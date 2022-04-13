@@ -1,5 +1,6 @@
 const users = [
   { contrasena: "admin", usuario: "administradorSUB", tipo: "admin" },
+  { contrasena: "paty123", usuario: "Paty Fuentes" },
   { contrasena: "Carlos", usuario: "Artemis" },
   { contrasena: "Atenea de Belcebú", usuario: "Luz" },
   { contrasena: "Carlos 3", usuario: "Felicia" },

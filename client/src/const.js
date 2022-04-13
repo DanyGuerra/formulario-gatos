@@ -1,3 +1,3 @@
 export default {
-  HOST: "https://sense-sub.herokuapp.com/",
+  HOST: "https://sub-sense.herokuapp.com/",
 };
