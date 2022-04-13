@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import host from "../const";
 import styled from "styled-components";
 import Header from "./Header";
+import { Modal } from "react-bootstrap";
+import Spinner from "react-bootstrap/Spinner";
 
 const EncuestaWrapper = styled.div`
   width: 100%;
@@ -111,6 +113,7 @@ const SubirVideo = ({ respuestas, usuario, day }) => {
 
         if (encuesta.ok) {
           navigate("/encuesta/terminada");
+          sending(false);
         }
       } else {
       }
@@ -136,6 +139,23 @@ const SubirVideo = ({ respuestas, usuario, day }) => {
 
   return (
     <>
+      <Modal
+        show={sending}
+        size="sm"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Body
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+          }}
+        >
+          <h2 style={{ fontFamily: "Sen" }}>Enviando</h2>
+          <Spinner animation="border" size="lg" />
+        </Modal.Body>
+      </Modal>
       <Header></Header>
       <EncuestaWrapper>
         <div className="form">
