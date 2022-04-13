@@ -139,7 +139,7 @@ router.post("/inicio-sesion", auth.isAuthorized, async (req, res) => {
   const encuestas = await getEncuestaByUser(req.body.user);
 
   if (encuestas.Count == 2) {
-    res.status(401).json({ mensaje: "El usuario ya contesto las encuestas" });
+    res.status(401).json({ mensaje: "El usuario ya contestó las encuestas" });
   } else {
     res.status(200).json({ usuario: req.body.user, dia: encuestas.Count + 1 });
   }

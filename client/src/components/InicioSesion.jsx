@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import host from "../const";
 import ScreenWelcome from "./ScreenWelcome";
 import styled from "styled-components";
+import LogoSUB from "./LogoSUB";
 
 const LoginWrappper = styled.div`
   width: 100%;
@@ -11,28 +12,42 @@ const LoginWrappper = styled.div`
   align-items: center;
   justify-content: center;
   font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+
+  .mensaje {
+    padding: 0px 20px;
+    height: 50px;
+    border: solid #0c6dce 2px;
+    color: #0c6dce;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 10px;
+  }
 
   form {
+    padding-bottom: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 15px;
     width: 297px;
     height: 263px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-
-    padding-bottom: 39px;
+    padding: 20px 0px 39px 0px;
 
     h1 {
       font-weight: 700;
       font-size: 20px;
       font-style: normal;
       line-height: 23px;
+      margin-bottom: 30px;
     }
     button,
     input {
       width: 212px;
+      height: 35px;
       font-weight: 400;
       font-family: "Roboto", sans-serif;
       font-size: 15px;
@@ -41,6 +56,9 @@ const LoginWrappper = styled.div`
     input {
       background: rgba(196, 196, 196, 0.15);
       border: 1px solid #a9a9a9;
+      border-radius: 0px;
+      margin-bottom: 25px;
+      font-family: "Roboto", sans-serif;
     }
 
     button {
@@ -52,6 +70,10 @@ const LoginWrappper = styled.div`
       font-weight: 700;
       font-size: 15px;
       color: #0c6dce;
+      :hover {
+        background-color: #0c6dce;
+        color: white;
+      }
     }
   }
 `;
@@ -115,31 +137,9 @@ const InicioSesion = ({ setIsLogin, isLogin, setUsuario, setDay }) => {
 
   return (
     <LoginWrappper>
-      {failLog ? <p>{mensajeLogin}</p> : <></>}
+      {failLog ? <p className="mensaje">{mensajeLogin}</p> : <></>}
+      <LogoSUB width={100} height={100}></LogoSUB>
       <form onSubmit={handleSubmit}>
-        <svg
-          width="100"
-          height="100"
-          viewBox="0 0 100 100"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g clipPath="url(#clip0_308_198)">
-            <path
-              d="M86.38 40.5899V86.8199H11.48V12.0599L44.92 37.0599L68 0.579941H54.73L41.9 20.4699L15.11 0.439941H0V98.2999H97.86V21.9999L86.38 40.5899Z"
-              fill="#260F5D"
-            />
-            <path
-              d="M48.92 77.61L24.34 59.27V43.83L45.91 59.98L83.82 0H97.86L48.92 77.61Z"
-              fill="#260F5D"
-            />
-          </g>
-          <defs>
-            <clipPath id="clip0_308_198">
-              <rect width="97.86" height="98.3" fill="white" />
-            </clipPath>
-          </defs>
-        </svg>
         <h1>INICIAR SESIÓN</h1>
         <div className="form-group">
           <input

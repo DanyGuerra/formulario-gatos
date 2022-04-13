@@ -23,7 +23,7 @@ const isAuthorized = function (req, res, next) {
   const contra = req.body.password;
 
   if (!correo || !contra) {
-    res.status(401).json({ mensaje: "Usuario a contrasena incorrecta" });
+    res.status(401).json({ mensaje: "Usuario o contraseña incorrecta" });
   }
 
   function search(nameKey, myArray) {
@@ -37,13 +37,13 @@ const isAuthorized = function (req, res, next) {
   let user = search(correo, users);
 
   if (!user) {
-    res.status(401).json({ mensaje: "Usuario a contrasena incorrecta" });
+    res.status(401).json({ mensaje: "Usuario o contraseña incorrectos" });
   }
 
   if (user.contrasena === contra) {
     return next();
   } else {
-    res.status(401).json({ mensaje: "Usuario a contrasena incorrecta" });
+    res.status(401).json({ mensaje: "Usuario o contraseña incorrectos" });
   }
 };
 
