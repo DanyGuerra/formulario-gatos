@@ -12,7 +12,6 @@ const EncuestaWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     font-family: "Sen";
 
     h1 {
@@ -25,7 +24,7 @@ const EncuestaWrapper = styled.div`
       text-align: center;
       color: #000000;
       margin-top: 60px;
-      margin-bottom: 60px;
+      margin-bottom: 40px;
     }
 
     .formulario-comment {
@@ -33,8 +32,8 @@ const EncuestaWrapper = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: 50%;
-      height: 50vh;
+      width: 40%;
+      height: 60vh;
       background: #ffffff;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       font-weight: 400;
@@ -68,11 +67,15 @@ const EncuestaWrapper = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: 50%;
-      height: 40vh;
+      width: 40%;
+      height: 60vh;
       background: #ffffff;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       font-weight: 400;
+      p {
+        text-align: center;
+        width: 80%;
+      }
 
       .form {
         display: flex;
@@ -102,7 +105,7 @@ const EncuestaWrapper = styled.div`
       }
     }
     button {
-      width: 250.48px;
+      width: 60%;
       height: 60px;
       border: 1px solid #aa9ceb;
       border-radius: 4px;
@@ -121,19 +124,20 @@ const EncuestaWrapper = styled.div`
 const encuesta = {
   dia1: [
     {
-      pregunta: "1. ¿Cuál olio primero?",
+      pregunta: "1. Observe a su gato y registre que muestra olió primero",
       opciones: ["427", "120", "693", "NINGUNA"],
     },
     {
-      pregunta: "2. ¿Cuál comió primero?",
+      pregunta:
+        "2. Ahora indíquenos ¿cuál fue el código de la muestra que comió primero?",
       opciones: ["427", "120", "693", "NINGUNA"],
     },
     {
-      pregunta: "3. ¿De cuál código comió mas?",
+      pregunta: "3. ¿De cuál código comió más?",
       opciones: ["427", "120", "693", "NINGUNA"],
     },
     {
-      pregunta: "4. ¿Cuanto comió?",
+      pregunta: "4. Indique por favor ¿cuánto comió?",
       opciones: ["NADA", "LA MITAD", "MAS DE LA MITAD"],
     },
   ],
@@ -204,19 +208,15 @@ const Encuesta = ({ setRespuestas, day }) => {
             </>
           ) : (
             <>
-              <EncuestaWrapper>
-                <div className="form">
-                  <h1>DÍA {day}</h1>
-                  <div className="formulario-comment">
-                    <p>5. ¿Comentarios?</p>
-                    <textarea
-                      onChange={onChangeComment}
-                      placeholder="Deja tu comentario (opcional)"
-                    ></textarea>
-                    <button onClick={handleSaveEnd}>GUARDAR</button>
-                  </div>
-                </div>
-              </EncuestaWrapper>
+              <h1>DÍA {day}</h1>
+              <div className="formulario-comment">
+                <p>5. ¿Comentarios?</p>
+                <textarea
+                  onChange={onChangeComment}
+                  placeholder="Deja tu comentario (opcional)"
+                ></textarea>
+                <button onClick={handleSaveEnd}>GUARDAR</button>
+              </div>
             </>
           )}
         </div>

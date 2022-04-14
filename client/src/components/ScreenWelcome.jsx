@@ -128,8 +128,7 @@ function ScreenWelcome() {
         <Header></Header>
         <h1>¡BIENVENIDO!</h1>
         <p>
-          Su felino ha sido seleccionado para participar un uno de nuestro
-          paneles felinos
+          Su felino ha sido seleccionado para participar en nuestro panel felino
         </p>
         <button
           id="comenzar"
