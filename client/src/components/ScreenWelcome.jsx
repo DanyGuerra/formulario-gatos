@@ -7,6 +7,11 @@ import Header from "./Header";
 import { AiOutlineClose } from "react-icons/ai";
 import image from "../assets/instrucciones-panelfelino-1.png";
 import seensePath from "../assets/sense-path.png";
+import Carousel from "react-bootstrap/Carousel";
+import step1 from "../assets/step1.png";
+import step2 from "../assets/step2.png";
+import step3 from "../assets/step3.png";
+import step4 from "../assets/step4.png";
 
 const WelcomeWrapper = styled.div`
   width: 100%;
@@ -92,17 +97,27 @@ const WelcomeWrapper = styled.div`
     line-height: 19px;
     text-align: center;
   }
+  @media (min-width: 768px) {
+  }
 `;
 
 function ScreenWelcome() {
   const [show, setShow] = useState(false);
   let navigate = useNavigate();
 
+  const styleImg = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
+  const imgStyle = { width: "auto", height: "400px", maxHeight: "400px" };
+
   return (
     <>
       <Modal
         show={show}
-        size="lg"
+        size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -121,7 +136,48 @@ function ScreenWelcome() {
           <AiOutlineClose onClick={() => setShow(false)}></AiOutlineClose>
         </Modal.Header>
         <Modal.Body>
-          <img src={image} alt="Dudas" className="img-fluid" />
+          <Carousel variant="dark">
+            <Carousel.Item>
+              <div class="item peopleCarouselImg" style={styleImg}>
+                <img
+                  className="d-block"
+                  src={step1}
+                  alt="First slide"
+                  style={imgStyle}
+                />
+              </div>
+            </Carousel.Item>
+            <Carousel.Item>
+              <div class="item peopleCarouselImg" style={styleImg}>
+                <img
+                  className="d-block "
+                  src={step2}
+                  alt="Second slide"
+                  style={imgStyle}
+                />
+              </div>
+            </Carousel.Item>
+            <Carousel.Item>
+              <div class="item peopleCarouselImg" style={styleImg}>
+                <img
+                  className="d-block w-100"
+                  src={step3}
+                  alt="Third slide"
+                  style={imgStyle}
+                />
+              </div>
+            </Carousel.Item>
+            <Carousel.Item>
+              <div class="item peopleCarouselImg" style={styleImg}>
+                <img
+                  className="d-block w-100"
+                  src={step4}
+                  alt="Third slide"
+                  style={imgStyle}
+                />
+              </div>
+            </Carousel.Item>
+          </Carousel>
         </Modal.Body>
       </Modal>
 
