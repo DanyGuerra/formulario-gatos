@@ -7,6 +7,12 @@ const EncuestaWrapper = styled.div`
   width: 100%;
   margin-top: 40px;
 
+  @media (max-width: 768px) {
+    #formulario {
+      width: 90%;
+    }
+  }
+
   .form {
     display: flex;
     flex-direction: column;
@@ -67,7 +73,7 @@ const EncuestaWrapper = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: 40%;
+      width: 60%;
       height: 60vh;
       background: #ffffff;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -186,7 +192,7 @@ const Encuesta = ({ setRespuestas, day }) => {
           {actualPreguntaN < encuesta.dia1.length ? (
             <>
               <h1>DÍA {day}</h1>
-              <div className="formulario">
+              <div className="formulario" id="formulario">
                 <p>{actualPregunta.pregunta}</p>
 
                 <div className="form">

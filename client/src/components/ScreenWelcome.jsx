@@ -24,6 +24,7 @@ const WelcomeWrapper = styled.div`
   @media (max-width: 768px) {
     gap: 50px;
   }
+
   #header-title {
     font-family: "Sen";
     font-style: normal;
