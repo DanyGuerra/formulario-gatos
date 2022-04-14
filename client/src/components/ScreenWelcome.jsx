@@ -6,6 +6,7 @@ import { Modal, Button } from "react-bootstrap";
 import Header from "./Header";
 import { AiOutlineClose } from "react-icons/ai";
 import image from "../assets/instrucciones-panelfelino-1.png";
+import seensePath from "../assets/sense-path.png";
 
 const WelcomeWrapper = styled.div`
   width: 100%;
@@ -138,6 +139,11 @@ function ScreenWelcome() {
         >
           Comenzar
         </button>
+        <img
+          src={seensePath}
+          alt="Logo Sense Path"
+          style={{ position: "absolute", bottom: "5vh" }}
+        />
         <button
           id="btn-dudas"
           onClick={() => {
