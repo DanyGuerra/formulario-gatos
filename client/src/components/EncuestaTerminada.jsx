@@ -9,6 +9,16 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: #aa9ceb;
+  @media (max-width: 768px) {
+    align-items: flex-start;
+    #mensaje {
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 40px;
+      width: 20%;
+      margin-left: 30%;
+    }
+  }
   .mensaje {
     text-align: center;
     font-family: "Sen";
@@ -25,7 +35,9 @@ const EncuestaTerminada = () => {
     <>
       <Header></Header>
       <Wrapper>
-        <div className="mensaje">¡GRACIAS POR TUS RESPUESTAS!</div>
+        <div className="mensaje" id="mensaje">
+          ¡GRACIAS POR TUS RESPUESTAS!
+        </div>
       </Wrapper>
     </>
   );

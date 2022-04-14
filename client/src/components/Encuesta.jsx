@@ -215,7 +215,7 @@ const Encuesta = ({ setRespuestas, day }) => {
           ) : (
             <>
               <h1>DÍA {day}</h1>
-              <div className="formulario-comment">
+              <div className="formulario-comment" id="formulario">
                 <p>5. ¿Comentarios?</p>
                 <textarea
                   onChange={onChangeComment}

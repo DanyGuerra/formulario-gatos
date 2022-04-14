@@ -9,6 +9,11 @@ import Spinner from "react-bootstrap/Spinner";
 const EncuestaWrapper = styled.div`
   width: 100%;
   margin-top: 40px;
+  @media (max-width: 768px) {
+    #formulario {
+      width: 90%;
+    }
+  }
 
   .form {
     display: flex;
@@ -160,7 +165,11 @@ const SubirVideo = ({ respuestas, usuario, day }) => {
       <EncuestaWrapper>
         <div className="form">
           <h1>DÍA 1</h1>
-          <form enctype="multipart/form-data" className="formulario">
+          <form
+            enctype="multipart/form-data"
+            className="formulario"
+            id="formulario"
+          >
             <p>6. Subir video</p>
             <div className="form">
               <div className="opcion file-input">
