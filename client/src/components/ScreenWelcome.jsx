@@ -21,6 +21,9 @@ const WelcomeWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
+  @media (max-width: 768px) {
+    gap: 50px;
+  }
   #header-title {
     font-family: "Sen";
     font-style: normal;
@@ -54,7 +57,7 @@ const WelcomeWrapper = styled.div`
     color: #260f5d;
   }
   p {
-    width: 640px;
+    width: 90%;
     height: 64px;
     font-family: "Sen";
     font-style: normal;
@@ -97,8 +100,6 @@ const WelcomeWrapper = styled.div`
     line-height: 19px;
     text-align: center;
   }
-  @media (min-width: 768px) {
-  }
 `;
 
 function ScreenWelcome() {
@@ -111,7 +112,7 @@ function ScreenWelcome() {
     alignItems: "center",
   };
 
-  const imgStyle = { width: "auto", height: "400px", maxHeight: "400px" };
+  const imgStyle = { height: "400px", width: "auto", maxHeight: "400px" };
 
   return (
     <>
@@ -119,7 +120,6 @@ function ScreenWelcome() {
         show={show}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"
-        centered
       >
         <Modal.Header className="modal-header">
           <h1
@@ -140,7 +140,7 @@ function ScreenWelcome() {
             <Carousel.Item>
               <div class="item peopleCarouselImg" style={styleImg}>
                 <img
-                  className="d-block"
+                  className="img-fluid"
                   src={step1}
                   alt="First slide"
                   style={imgStyle}
@@ -150,7 +150,7 @@ function ScreenWelcome() {
             <Carousel.Item>
               <div class="item peopleCarouselImg" style={styleImg}>
                 <img
-                  className="d-block "
+                  className="img-fluid"
                   src={step2}
                   alt="Second slide"
                   style={imgStyle}
@@ -160,7 +160,7 @@ function ScreenWelcome() {
             <Carousel.Item>
               <div class="item peopleCarouselImg" style={styleImg}>
                 <img
-                  className="d-block w-100"
+                  className="img-fluid"
                   src={step3}
                   alt="Third slide"
                   style={imgStyle}
@@ -170,7 +170,7 @@ function ScreenWelcome() {
             <Carousel.Item>
               <div class="item peopleCarouselImg" style={styleImg}>
                 <img
-                  className="d-block w-100"
+                  className="img-fluid"
                   src={step4}
                   alt="Third slide"
                   style={imgStyle}
